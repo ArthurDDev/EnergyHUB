@@ -1,6 +1,6 @@
 function love.load()
   love.window.setMode(800, 600)
-  cameraFile=require 'libraries/hump/camera'
+  cameraFile=require 'libraries/hump-master/camera'
   cam=cameraFile()
 
   camX=love.graphics.getWidth()/2
@@ -12,7 +12,7 @@ function love.load()
   --renderer=Renderer:create()
   require 'player'
 
-  wf=require 'libraries/windfield/windfield'
+  wf=require 'libraries/windfield-master/windfield'
   world=wf.newWorld(0, 0, false)
   world:setQueryDebugDrawing(true)
   world:addCollisionClass('Build')

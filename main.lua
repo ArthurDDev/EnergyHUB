@@ -1,59 +1,82 @@
+-------------------------------------------------------------------------------------
+
+---------------------Window
+love.window.setMode(800, 600)
+  
+---------------------Camera
+--Set camera
+cameraFile=require 'libraries/hump-master/camera'
+cam=cameraFile()
+--Set camera variables
+camX=0
+camY=0
+camspeed=200
+
+build=false
+
+----------------------Tools
+--Renderer
+local Renderer=require 'src/Tools/renderer'
+renderer=Renderer:create()
+--gameLoop
+local GameLoop=require 'src/Tools/gameLoop'
+gameLoop=GameLoop:create()
+
+----------------------Objects
+--World
+require 'src/Objects/world'
+--UI
+require 'src/Objects/UI'
+
+
+----------------------Windfield
+--wf=require 'libraries/windfield-master/windfield'
+--world=wf.newWorld(0, 0, false)
+
 function love.load()
-  love.window.setMode(800, 600)
-  cameraFile=require 'libraries/hump-master/camera'
-  cam=cameraFile()
 
-  camX=love.graphics.getWidth()/2
-  camY=love.graphics.getHeight()/2
-  camspeed=200
+  ----------Camera
+  --zoom
+  cam:zoom(2)
 
-  build=false
-  --local Renderer=require 'renderer'
-  --renderer=Renderer:create()
-  require 'player'
-
-  wf=require 'libraries/windfield-master/windfield'
-  world=wf.newWorld(0, 0, false)
-  world:setQueryDebugDrawing(true)
-  world:addCollisionClass('Build')
-  ex=world:newRectangleCollider(100, 100, 200, 200, {collision_class='Build'})
+  ----------World
+  worldStart()
 
 end
 
 function love.update(dt)
-  world:update(dt)
-  playerUpdate(dt)
+
+  --world:update(dt)
+  worldUpdate(dt)
   cam:lookAt(camX, camY)
 
-  if love.keyboard.isDown('up') then
+  --------------------Camera
+  if love.keyboard.isDown('w') then
     camY=camY-camspeed*dt
   end
-  if love.keyboard.isDown('down') then
+  if love.keyboard.isDown('s') then
     camY=camY+camspeed*dt
   end
-  if love.keyboard.isDown('right') then
+  if love.keyboard.isDown('d') then
     camX=camX+camspeed*dt
   end
-  if love.keyboard.isDown('left') then
+  if love.keyboard.isDown('a') then
     camX=camX-camspeed*dt
   end
 
-  if love.mouse.isDown(1) then
-    colliders=world:queryRectangleArea(love.mouse.getX(), love.mouse.getY(), 20, 20, {'Build'})
-    if #colliders>0 then
-      build=true
-    end
-  end
 end
 
 function love.draw()
-  --renderer:draw()
-  playerDraw()
-  if yay==true then
-    love.graphics.print('YAY')
-  end
+
   cam:attach()
-    world:draw()
-    love.graphics.rectangle('fill', 0, 0, 100, 100)
+
+    --Renderer
+    worldDraw()
+    renderer:draw()
+
   cam:detach()
+
+  --UI
+  UIDraw()
+
 end

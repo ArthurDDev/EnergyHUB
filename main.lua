@@ -8,12 +8,17 @@ love.window.setMode(800, 600)
 cameraFile=require 'libraries/hump-master/camera'
 cam=cameraFile()
 --Set camera variables
-camX=0
-camY=0
+camX=60*16/2
+camY=60*16/2
 camspeed=200
 
-build=false
-
+----------------------Libraries
+--lunajson
+lunajson = require 'libraries/lunajson-master'
+----------------------Configuration
+--construction
+local ConstructionConfiguration = require 'assets/Configuration/constructionConfig'
+constructionConfig = lunajson.decode(ConstructionConfiguration)
 ----------------------Tools
 --Renderer
 local Renderer=require 'src/Tools/renderer'
@@ -27,11 +32,6 @@ gameLoop=GameLoop:create()
 require 'src/Objects/world'
 --UI
 require 'src/Objects/UI'
-
-
-----------------------Windfield
---wf=require 'libraries/windfield-master/windfield'
---world=wf.newWorld(0, 0, false)
 
 function love.load()
 
@@ -52,17 +52,22 @@ function love.update(dt)
 
   --------------------Camera
   if love.keyboard.isDown('w') then
-    camY=camY-camspeed*dt
+    camY=math.floor(camY-camspeed*dt)
   end
   if love.keyboard.isDown('s') then
-    camY=camY+camspeed*dt
+    camY=math.floor(camY+camspeed*dt)
   end
   if love.keyboard.isDown('d') then
-    camX=camX+camspeed*dt
+    camX=math.floor(camX+camspeed*dt)
   end
   if love.keyboard.isDown('a') then
-    camX=camX-camspeed*dt
+    camX=math.floor(camX-camspeed*dt)
   end
+
+  if camX < 0 then camX = 0 end
+  if camX > 60*16 then camX = 60*16 end
+  if camY < 0 then camY = 0 end
+  if camY > 60*16 then camY = 60*16 end
 
 end
 

@@ -1,0 +1,16 @@
+
+{
+    "usine" : {
+        "id" : 0,
+        "name" : "usine",
+        "size" : {
+            "width" : 3,
+            "height" : 3
+        },
+        "offset": {
+            "X" : 2,
+            "Y" : 2
+        },
+        "sprite" : null
+    }
+}

@@ -14,15 +14,17 @@ camspeed=200
 
 ----------------------Libraries
 --lunajson
-lunajson = require 'libraries/lunajson-master'
+lunajson = require 'lunajson'
 ----------------------Configuration
 --construction
-local ConstructionConfiguration = require 'assets/Configuration/constructionConfig'
-constructionConfig = lunajson.decode(ConstructionConfiguration)
+local file = io.open('assets/Configuration/constructionConfig.json')
+local configContents = file:read("*all")
+constructionConfig = lunajson.decode(configContents)
+
 ----------------------Tools
 --Renderer
 local Renderer=require 'src/Tools/renderer'
-renderer=Renderer:create()
+Texture:setFilter( "nearest", "nearest", 1 )
 --gameLoop
 local GameLoop=require 'src/Tools/gameLoop'
 gameLoop=GameLoop:create()
@@ -38,6 +40,8 @@ function love.load()
   ----------Camera
   --zoom
   cam:zoom(2)
+  --filter
+  love.graphics.setDefaultFilter( "nearest", "nearest", 0 )
 
   ----------World
   worldStart()

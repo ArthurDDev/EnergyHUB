@@ -18,6 +18,15 @@ tilemap = {}
 tilemap.size = size
 tilemap.cells = {}
 
+----------------Construction
+selected = 1
+sprites = {}
+sprites[1] = love.graphics.newImage("assets/Sprites/Usinas/Usina1.png")
+
+sprites[2] = love.graphics.newImage("assets/Sprites/Usinas/Usina2.png")
+
+sprites[3] = love.graphics.newImage("assets/Sprites/Usinas/Usina3.png")
+
 function worldStart()
 
   ----------------Tiles
@@ -28,25 +37,28 @@ function worldStart()
   --initialize tiles
   local imagedata = love.image.newImageData('assets/Sprites/map.png')
 
+  --------------World
   for i = 0, tilemap.size.x - 1 do
     tilemap.cells[i] = {} 
     for j = 0, tilemap.size.y - 1 do
       tilemap.cells[i][j] = {}
       tilemap.cells[i][j].type = "water"
-      tilemap.cells[i][j].filled = false
-      tilemap.cells[i][j].construction = "nil"
+      tilemap.cells[i][j].filled = true
+      tilemap.cells[i][j].construction = 0
       tilemap.cells[i][j].sprite = 2
+      tilemap.cells[i][j].father = {}
+      tilemap.cells[i][j].father["X"] = nil
+      tilemap.cells[i][j].father["Y"] = nil
 
       local r = imagedata:getPixel(i, j)
       
       if r == 0 then
         tilemap.cells[i][j].sprite = 1
         tilemap.cells[i][j].type = "land"
+        tilemap.cells[i][j].filled = false
       end
     end
   end
-
-  print(constructionConfig["usine"]["id"])
 
 end
 
@@ -66,17 +78,42 @@ function worldUpdate(dt)
   
   if mouseX > -1 and mouseX < tilemap.size.x and mouseY > -1 and mouseY < tilemap.size.y then
     if tilemap.cells[mouseX][mouseY].filled == true then
-      --print("Position: "..mouseX.." : "..mouseY.." -- Cell:  "..tilemap.cells[mouseX][mouseY].type.." : ".."True".." : "..tilemap.cells[mouseX][mouseY].construction)
+      print("Position: "..mouseX.." : "..mouseY.." -- Cell:  "..tilemap.cells[mouseX][mouseY].type.." : ".."True".." : "..tilemap.cells[mouseX][mouseY].construction)
     else
-      --print("Position: "..mouseX.." : "..mouseY.." -- Cell:  "..tilemap.cells[mouseX][mouseY].type.." : ".."False".." : "..tilemap.cells[mouseX][mouseY].construction)
+      print("Position: "..mouseX.." : "..mouseY.." -- Cell:  "..tilemap.cells[mouseX][mouseY].type.." : ".."False".." : "..tilemap.cells[mouseX][mouseY].construction)
     end
   else
-    --print("No tile selected!")
+    print("No tile selected!")
   end
 
   if love.mouse.isDown(1) then
-    tilemap.cells[mouseX][mouseY].construction = "usine"
-    tilemap.cells[mouseX][mouseY].filled = true
+    local proceed = true
+
+    local width = constructionConfig[""..selected]["size"]["width"]
+    local height = constructionConfig[""..selected]["size"]["height"]
+
+    local offsetX = constructionConfig[""..selected]["offset"]["X"]
+    local offsetY = constructionConfig[""..selected]["offset"]["Y"]
+
+    for i = 0, width - 1 do
+      for j = 0, height - 1 do
+        if tilemap.cells[mouseX - offsetX + 1 + i][mouseY - offsetX + 1 + j].filled == true then  proceed = false end
+      end
+    end
+
+    if tilemap.cells[mouseX][mouseY].filled == false then
+      if proceed == true then 
+        tilemap.cells[mouseX - offsetX + 1][mouseY - offsetY + 1].construction = selected
+
+        for i = 0, width - 1 do
+          for j = 0, height - 1 do
+            tilemap.cells[mouseX - offsetX + 1 + i][mouseY - offsetX + 1 + j].filled = true
+            tilemap.cells[mouseX - offsetX + 1 + i][mouseY - offsetX + 1 + j].father["X"] = mouseX - offsetX + 1
+            tilemap.cells[mouseX - offsetX + 1 + i][mouseY - offsetX + 1 + j].father["Y"] = mouseX - offsetY + 1
+          end
+        end
+      end
+    end
   end
 
 end
@@ -94,8 +131,9 @@ function worldDraw()
   --Buildings
   for i = 0, tilemap.size.x - 1 do
     for j = 0, tilemap.size.y - 1 do
-      if tilemap.cells[i][j].construction ~= "nil" then
-        love.graphics.rectangle("fill", i*16, j*16, 64, 64, 2, 2)
+      local construction = tilemap.cells[i][j].construction
+      if construction ~= 0 then
+        love.graphics.draw(sprites[construction], i*16, j*16)
       end
     end
   end

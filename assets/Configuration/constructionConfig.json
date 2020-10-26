@@ -1,8 +1,6 @@
-
-{
-    "usine" : {
-        "id" : 0,
-        "name" : "usine",
+{  
+    "1" : {
+        "name" : "solar",
         "size" : {
             "width" : 3,
             "height" : 3
@@ -11,6 +9,30 @@
             "X" : 2,
             "Y" : 2
         },
-        "sprite" : null
+        "sprite" : "Usina - 1"
+    },
+    "2" : {
+        "name" : "Termoeletrica",
+        "size" : {
+            "width" : 3,
+            "height" : 3
+        },
+        "offset": {
+            "X" : 2,
+            "Y" : 2
+        },
+        "sprite" : "Usina - 2"
+    },
+    "3" : {
+        "name" : "Nuclear",
+        "size" : {
+            "width" : 3,
+            "height" : 3
+        },
+        "offset": {
+            "X" : 2,
+            "Y" : 2
+        },
+        "sprite" : "Usina - 3"
     }
 }

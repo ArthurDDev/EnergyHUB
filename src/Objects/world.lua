@@ -21,11 +21,11 @@ tilemap.cells = {}
 ----------------Construction
 selected = 1
 sprites = {}
-sprites[1] = love.graphics.newImage("assets/Sprites/Usinas/Usina1.png")
+sprites[1] = love.graphics.newImage("assets/Sprites/Usinas/Usina1.png") --Load Sprites
 
-sprites[2] = love.graphics.newImage("assets/Sprites/Usinas/Usina2.png")
+sprites[2] = love.graphics.newImage("assets/Sprites/Usinas/Usina2.png") --Load Sprites
 
-sprites[3] = love.graphics.newImage("assets/Sprites/Usinas/Usina3.png")
+sprites[3] = love.graphics.newImage("assets/Sprites/Usinas/Usina3.png") --Load Sprites
 
 function worldStart()
 
@@ -76,6 +76,7 @@ function worldUpdate(dt)
   mouseX = math.floor((love.mouse.getX()/2 + camX - 200)/16)
   mouseY = math.floor((love.mouse.getY()/2 + camY - 150)/16)
   
+  --Debug
   if mouseX > -1 and mouseX < tilemap.size.x and mouseY > -1 and mouseY < tilemap.size.y then
     if tilemap.cells[mouseX][mouseY].filled == true then
       print("Position: "..mouseX.." : "..mouseY.." -- Cell:  "..tilemap.cells[mouseX][mouseY].type.." : ".."True".." : "..tilemap.cells[mouseX][mouseY].construction)

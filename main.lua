@@ -14,12 +14,12 @@ camspeed=200
 
 ----------------------Libraries
 --lunajson
-lunajson = require 'lunajson'
+local newdecoder = require 'libraries/lunajson.decoder'
 ----------------------Configuration
 --construction
 local file = io.open('assets/Configuration/constructionConfig.json')
 local configContents = file:read("*all")
-constructionConfig = lunajson.decode(configContents)
+constructionConfig = newdecoder.decode(configContents)
 
 ----------------------Tools
 --Renderer

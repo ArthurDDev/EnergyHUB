@@ -18,7 +18,7 @@ local newdecoder = require 'libraries/lunajson.decoder'
 local decode = newdecoder()
 ----------------------Configuration
 --construction
-file = assert(io.open("constructionConfig.json"))
+file = assert(io.open("assets/Configuration/constructionConfig.json"))
 local configContents = file:read("*all")
 constructionConfig = decode(configContents)
 

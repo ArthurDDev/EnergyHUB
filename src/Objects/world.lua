@@ -21,11 +21,15 @@ tilemap.cells = {}
 ----------------Construction
 selected = 1
 sprites = {}
-sprites[1] = love.graphics.newImage("assets/Sprites/Usinas/Usina1.png") --Load Sprites
 
-sprites[2] = love.graphics.newImage("assets/Sprites/Usinas/Usina2.png") --Load Sprites
+sprites[1]={}
+sprites[1].image = love.graphics.newImage("assets/Sprites/Usinas/Usina1.png") --Load Sprites
 
-sprites[3] = love.graphics.newImage("assets/Sprites/Usinas/Usina3.png") --Load Sprites
+sprites[2]={}
+sprites[2].image = love.graphics.newImage("assets/Sprites/Usinas/Usina2.png") --Load Sprites
+
+sprites[3]={}
+sprites[3].image = love.graphics.newImage("assets/Sprites/Usinas/Usina3.png") --Load Sprites
 
 function worldStart()
 
@@ -39,7 +43,7 @@ function worldStart()
 
   --------------World
   for i = 0, tilemap.size.x - 1 do
-    tilemap.cells[i] = {} 
+    tilemap.cells[i] = {}
     for j = 0, tilemap.size.y - 1 do
       tilemap.cells[i][j] = {}
       tilemap.cells[i][j].type = "water"
@@ -51,7 +55,7 @@ function worldStart()
       tilemap.cells[i][j].father["Y"] = nil
 
       local r = imagedata:getPixel(i, j)
-      
+
       if r == 0 then
         tilemap.cells[i][j].sprite = 1
         tilemap.cells[i][j].type = "land"
@@ -75,7 +79,7 @@ function worldUpdate(dt)
   --------------Build
   mouseX = math.floor((love.mouse.getX()/2 + camX - 200)/16)
   mouseY = math.floor((love.mouse.getY()/2 + camY - 150)/16)
-  
+
   --Debug
   if mouseX > -1 and mouseX < tilemap.size.x and mouseY > -1 and mouseY < tilemap.size.y then
     if tilemap.cells[mouseX][mouseY].filled == true then
@@ -103,7 +107,7 @@ function worldUpdate(dt)
     end
 
     if tilemap.cells[mouseX][mouseY].filled == false then
-      if proceed == true then 
+      if proceed == true then
         tilemap.cells[mouseX - offsetX + 1][mouseY - offsetY + 1].construction = selected
 
         for i = 0, width - 1 do

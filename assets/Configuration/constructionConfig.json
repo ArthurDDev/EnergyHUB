@@ -18,8 +18,8 @@
             "height" : 3
         },
         "offset": {
-            "X" : 2,
-            "Y" : 2
+            "X" : 1,
+            "Y" : 1
         },
         "sprite" : "Usina - 2"
     },
@@ -30,8 +30,8 @@
             "height" : 3
         },
         "offset": {
-            "X" : 2,
-            "Y" : 2
+            "X" : 1,
+            "Y" : 1
         },
         "sprite" : "Usina - 3"
     }

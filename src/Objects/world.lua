@@ -138,7 +138,7 @@ function worldDraw()
     for j = 0, tilemap.size.y - 1 do
       local construction = tilemap.cells[i][j].construction
       if construction ~= 0 then
-        love.graphics.draw(sprites[construction], i*16, j*16)
+        love.graphics.draw(sprites[construction].image, i*16, j*16)
       end
     end
   end

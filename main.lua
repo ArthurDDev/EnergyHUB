@@ -30,11 +30,23 @@ renderer=Renderer:create()
 local GameLoop=require 'src/Tools/gameLoop'
 gameLoop=GameLoop:create()
 
+
 ----------------------Objects
 --World
-require 'src/Objects/world'
---UI
-require 'src/Objects/UI'
+world = require 'src/Objects/world'
+sprites = {}
+
+sprites[1]={}
+sprites[1].image = love.graphics.newImage("assets/Sprites/Usinas/Usina1.png") --Load Sprites
+
+sprites[2]={}
+sprites[2].image = love.graphics.newImage("assets/Sprites/Usinas/Usina2.png") --Load Sprites
+
+sprites[3]={}
+sprites[3].image = love.graphics.newImage("assets/Sprites/Usinas/Usina3.png") --Load Sprites
+--UI Window
+UIWindow = require 'src/Objects/UI/UIWindow'
+require 'src/Objects/UI/UI'
 
 function love.load() --------------------------------------------------Load
 
@@ -87,6 +99,9 @@ function love.update(dt) --------------------------------------------- Update
   if camX > 60*16 then camX = 60*16 end
   if camY < 0 then camY = 0 end
   if camY > 60*16 then camY = 60*16 end
+
+  --------------------UIWindow
+  UIUpdate()
 
 end
 

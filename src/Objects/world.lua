@@ -20,7 +20,8 @@ tilemap.cells = {}
 
 ----------------Construction
 selected = 1
-sprites = {}
+
+sprites={}
 
 sprites[1]={}
 sprites[1].image = love.graphics.newImage("assets/Sprites/Usinas/Termoeletrica.png") --Load Sprites
@@ -39,6 +40,8 @@ sprites[5].image = love.graphics.newImage("assets/Sprites/Usinas/Hidrelétrica (
 
 sprites[6]={}
 sprites[6].image = love.graphics.newImage("assets/Sprites/Usinas/Nuclear.png") --Load Sprites
+
+isMouseOnWorld = true
 
 function worldStart()
 
@@ -99,7 +102,7 @@ function worldUpdate(dt)
     print("No tile selected!")
   end
 
-  if love.mouse.isDown(1) then
+  if love.mouse.isDown(1) and isMouseOnWorld then
     local proceed = true
 
     local width = constructionConfig[""..selected]["size"]["width"]

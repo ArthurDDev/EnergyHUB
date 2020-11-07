@@ -1,5 +1,5 @@
 ----------------------------------------------------
-
+--require 'src/Tools/animation'
 ----------------Controll
 --money
 money = 0
@@ -23,13 +23,22 @@ selected = 1
 sprites = {}
 
 sprites[1]={}
-sprites[1].image = love.graphics.newImage("assets/Sprites/Usinas/Usina1.png") --Load Sprites
+sprites[1].image = love.graphics.newImage("assets/Sprites/Usinas/Termoeletrica.png") --Load Sprites
 
 sprites[2]={}
-sprites[2].image = love.graphics.newImage("assets/Sprites/Usinas/Usina2.png") --Load Sprites
+sprites[2].image = love.graphics.newImage("assets/Sprites/Usinas/Biomassa.png") --Load Sprites
 
 sprites[3]={}
-sprites[3].image = love.graphics.newImage("assets/Sprites/Usinas/Usina3.png") --Load Sprites
+sprites[3].image = love.graphics.newImage("assets/Sprites/Usinas/Hidrelétrica (1).png") --Load Sprites
+
+sprites[4]={}
+sprites[4].image = love.graphics.newImage("assets/Sprites/Usinas/Solar01.png") --Load Sprites
+
+sprites[5]={}
+sprites[5].image = love.graphics.newImage("assets/Sprites/Usinas/Hidrelétrica (1).png") --Load Sprites
+
+sprites[6]={}
+sprites[6].image = love.graphics.newImage("assets/Sprites/Usinas/Nuclear.png") --Load Sprites
 
 function worldStart()
 
@@ -67,7 +76,6 @@ function worldStart()
 end
 
 function worldUpdate(dt)
-
   -------------Money
   if mTimer < mTargetTimer then
     mTimer = mTimer + dt*10
@@ -138,7 +146,10 @@ function worldDraw()
     for j = 0, tilemap.size.y - 1 do
       local construction = tilemap.cells[i][j].construction
       if construction ~= 0 then
-        love.graphics.draw(sprites[construction].image, i*16, j*16)
+        --love.graphics.draw(sprites[construction].image, i*16, j*16)
+        --load_animation()
+        --update_animation(sprites[construction], dt)
+        draw_animation(sprites[construction], i*16, j*16)
       end
     end
   end
@@ -163,4 +174,30 @@ function newTileSet(image, width, height) --create tileset
   end
 
   return tileSet
+end
+
+anim8 = require 'libraries/anim8-master/anim8'
+
+function load_animation()
+  grid1 = anim8.newGrid(32, 32, sprites[1].image:getWidth(), sprites[1].image:getHeight())
+  grid2 = anim8.newGrid(112, 64, sprites[2].image:getWidth(), sprites[2].image:getHeight())
+  grid3 = anim8.newGrid(48, 48, sprites[3].image:getWidth(), sprites[3].image:getHeight())
+  grid4 = anim8.newGrid(48, 48, sprites[4].image:getWidth(), sprites[4].image:getHeight())
+  grid5 = anim8.newGrid(48, 48, sprites[3].image:getWidth(), sprites[3].image:getHeight())
+  grid6 = anim8.newGrid(32, 32, sprites[6].image:getWidth(), sprites[6].image:getHeight())
+
+  sprites[1].animation = anim8.newAnimation(grid1(1, '1-2'), 0.3)
+  sprites[2].animation = anim8.newAnimation(grid2(1, '1-2'), 0.3)
+  sprites[3].animation = anim8.newAnimation(grid3(1, '1-2'), 0.3)
+  sprites[4].animation = anim8.newAnimation(grid4(1, '1-10'), 0.3)
+  sprites[5].animation = anim8.newAnimation(grid5(1, '1-2'), 0.3)
+  sprites[6].animation = anim8.newAnimation(grid6(1, '1-2'), 0.3)
+end
+
+function update_animation(sprite, dt)
+  sprite.animation:update(dt)
+end
+
+function draw_animation(sprite, x, y)
+  sprite.animation:draw(sprite.image, x, y)
 end

@@ -2,7 +2,7 @@
 
 ---------------------Window
 love.window.setMode(800, 600)
-  
+
 ---------------------Camera
 --Set camera
 cameraFile=require 'libraries/hump-master/camera'
@@ -38,6 +38,8 @@ require 'src/Objects/UI'
 
 function love.load() --------------------------------------------------Load
 
+  load_animation()
+
   ----------Camera
   --zoom
   cam:zoom(2)
@@ -51,6 +53,17 @@ end
 
 function love.update(dt) --------------------------------------------- Update
 
+  for i = 0, tilemap.size.x - 1 do
+    for j = 0, tilemap.size.y - 1 do
+      local construction = tilemap.cells[i][j].construction
+      if construction ~= 0 then
+        --love.graphics.draw(sprites[construction].image, i*16, j*16)
+        --load_animation()
+        update_animation(sprites[construction], dt)
+        --draw_animation(sprites[construction], i*16, j*16)
+      end
+    end
+  end
   --world:update(dt)
   worldUpdate(dt)
   cam:lookAt(camX, camY)
@@ -90,7 +103,7 @@ function love.draw() ------------------------------------------------- Draw
   cam:detach()
 
   --Tudo colocado aqui será desenhado em cima da camera
-  
+
   --UI
   UIDraw()
 

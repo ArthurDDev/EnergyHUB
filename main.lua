@@ -50,8 +50,6 @@ require 'src/Objects/UI/UI'
 
 function love.load() --------------------------------------------------Load
 
-  load_animation()
-
   ----------Camera
   --zoom
   cam:zoom(2)

@@ -121,3 +121,6 @@ function love.draw() ------------------------------------------------- Draw
   UIDraw()
 
 end
+function turnos
+
+end

@@ -50,8 +50,6 @@ require 'src/Objects/UI/UI'
 
 function love.load() --------------------------------------------------Load
 
-  load_animation()
-
   ----------Camera
   --zoom
   cam:zoom(2)
@@ -121,5 +119,8 @@ function love.draw() ------------------------------------------------- Draw
 
   --UI
   UIDraw()
+
+end
+function turnos
 
 end

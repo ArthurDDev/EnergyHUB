@@ -150,8 +150,7 @@ function worldDraw()
       local construction = tilemap.cells[i][j].construction
       if construction ~= 0 then
         --love.graphics.draw(sprites[construction].image, i*16, j*16)
-        --load_animation()
-        --update_animation(sprites[construction], dt)
+        update_animation(sprites[construction], dt)
         draw_animation(sprites[construction], i*16, j*16)
       end
     end
@@ -185,8 +184,9 @@ function load_animation()
   grid1 = anim8.newGrid(32, 32, sprites[1].image:getWidth(), sprites[1].image:getHeight())
   grid2 = anim8.newGrid(112, 64, sprites[2].image:getWidth(), sprites[2].image:getHeight())
   grid3 = anim8.newGrid(48, 48, sprites[3].image:getWidth(), sprites[3].image:getHeight())
-  grid4 = anim8.newGrid(48, 48, sprites[4].image:getWidth(), sprites[4].image:getHeight())
-  grid6 = anim8.newGrid(32, 32, sprites[6].image:getWidth(), sprites[6].image:getHeight())
+  grid4 = anim8.newGrid(48, 48, sprites[3].image:getWidth(), sprites[3].image:getHeight())
+  grid5 = anim8.newGrid(48, 48, sprites[3].image:getWidth(), sprites[3].image:getHeight())
+  grid6 = anim8.newGrid(32, 32, sprites[3].image:getWidth(), sprites[3].image:getHeight())
 
   sprites[1].animation = anim8.newAnimation(grid1(1, '1-2'), 0.3)
   sprites[2].animation = anim8.newAnimation(grid2(1, '1-2'), 0.3)

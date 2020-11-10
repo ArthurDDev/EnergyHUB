@@ -186,7 +186,6 @@ function load_animation()
   grid2 = anim8.newGrid(112, 64, sprites[2].image:getWidth(), sprites[2].image:getHeight())
   grid3 = anim8.newGrid(48, 48, sprites[3].image:getWidth(), sprites[3].image:getHeight())
   grid4 = anim8.newGrid(48, 48, sprites[4].image:getWidth(), sprites[4].image:getHeight())
-  grid5 = anim8.newGrid(48, 48, sprites[3].image:getWidth(), sprites[3].image:getHeight())
   grid6 = anim8.newGrid(32, 32, sprites[6].image:getWidth(), sprites[6].image:getHeight())
 
   sprites[1].animation = anim8.newAnimation(grid1(1, '1-2'), 0.3)

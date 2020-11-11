@@ -36,7 +36,7 @@ sprites[4]={}
 sprites[4].image = love.graphics.newImage("assets/Sprites/Usinas/Solar01.png") --Load Sprites
 
 sprites[5]={}
-sprites[5].image = love.graphics.newImage("assets/Sprites/Usinas/Hidrelétrica (1).png") --Load Sprites
+sprites[5].image = love.graphics.newImage("assets/Sprites/Usinas/Turbina.png") --Load Sprites
 
 sprites[6]={}
 sprites[6].image = love.graphics.newImage("assets/Sprites/Usinas/Nuclear.png") --Load Sprites
@@ -45,6 +45,7 @@ isMouseOnWorld = true
 
 function worldStart()
 
+  load_animation()
   ----------------Tiles
   --tileset
   tilesetImage = love.graphics.newImage('assets/Sprites/Tilesets/TileSet.png')
@@ -150,7 +151,7 @@ function worldDraw()
       local construction = tilemap.cells[i][j].construction
       if construction ~= 0 then
         --love.graphics.draw(sprites[construction].image, i*16, j*16)
-        update_animation(sprites[construction], dt)
+        --update_animation(sprites[construction].animation, dt)
         draw_animation(sprites[construction], i*16, j*16)
       end
     end
@@ -184,20 +185,20 @@ function load_animation()
   grid1 = anim8.newGrid(32, 32, sprites[1].image:getWidth(), sprites[1].image:getHeight())
   grid2 = anim8.newGrid(112, 64, sprites[2].image:getWidth(), sprites[2].image:getHeight())
   grid3 = anim8.newGrid(48, 48, sprites[3].image:getWidth(), sprites[3].image:getHeight())
-  grid4 = anim8.newGrid(48, 48, sprites[3].image:getWidth(), sprites[3].image:getHeight())
-  grid5 = anim8.newGrid(48, 48, sprites[3].image:getWidth(), sprites[3].image:getHeight())
-  grid6 = anim8.newGrid(32, 32, sprites[3].image:getWidth(), sprites[3].image:getHeight())
+  grid4 = anim8.newGrid(48, 48, sprites[4].image:getWidth(), sprites[4].image:getHeight())
+  grid5 = anim8.newGrid(64, 106, sprites[5].image:getWidth(), sprites[5].image:getHeight())
+  grid6 = anim8.newGrid(32, 32, sprites[6].image:getWidth(), sprites[6].image:getHeight())
 
   sprites[1].animation = anim8.newAnimation(grid1(1, '1-2'), 0.3)
   sprites[2].animation = anim8.newAnimation(grid2(1, '1-2'), 0.3)
   sprites[3].animation = anim8.newAnimation(grid3(1, '1-2'), 0.3)
   sprites[4].animation = anim8.newAnimation(grid4(1, '1-10'), 0.3)
-  sprites[5].animation = anim8.newAnimation(grid5(1, '1-2'), 0.3)
+  sprites[5].animation = anim8.newAnimation(grid5('1-5', 1), 0.3)
   sprites[6].animation = anim8.newAnimation(grid6(1, '1-2'), 0.3)
 end
 
-function update_animation(sprite, dt)
-  sprite.animation:update(dt)
+function update_animation(animation, dt)
+  animation:update(dt)
 end
 
 function draw_animation(sprite, x, y)

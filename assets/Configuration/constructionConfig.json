@@ -46,12 +46,12 @@
     "5" : {
         "name" : "Eólica",
         "size" : {
-            "width" : 3,
-            "height" : 3
+            "width" : 4,
+            "height" : 6
         },
         "offset": {
             "X" : 2,
-            "Y" : 2
+            "Y" : 3
         }
     },
     "6" : {

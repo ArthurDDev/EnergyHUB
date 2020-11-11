@@ -34,16 +34,7 @@ gameLoop=GameLoop:create()
 ----------------------Objects
 --World
 world = require 'src/Objects/world'
-sprites = {}
 
-sprites[1]={}
-sprites[1].image = love.graphics.newImage("assets/Sprites/Usinas/Usina1.png") --Load Sprites
-
-sprites[2]={}
-sprites[2].image = love.graphics.newImage("assets/Sprites/Usinas/Usina2.png") --Load Sprites
-
-sprites[3]={}
-sprites[3].image = love.graphics.newImage("assets/Sprites/Usinas/Usina3.png") --Load Sprites
 --UI Window
 UIWindow = require 'src/Objects/UI/UIWindow'
 require 'src/Objects/UI/UI'
@@ -69,7 +60,7 @@ function love.update(dt) --------------------------------------------- Update
       if construction ~= 0 then
         --love.graphics.draw(sprites[construction].image, i*16, j*16)
         --load_animation()
-        update_animation(sprites[construction], dt)
+        update_animation(sprites[construction].animation, dt)
         --draw_animation(sprites[construction], i*16, j*16)
       end
     end
@@ -121,6 +112,6 @@ function love.draw() ------------------------------------------------- Draw
   UIDraw()
 
 end
-function turnos
+function turnos()
 
 end

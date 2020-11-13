@@ -39,6 +39,8 @@ world = require 'src/Objects/world'
 UIWindow = require 'src/Objects/UI/UIWindow'
 require 'src/Objects/UI/UI'
 
+require 'src/Objects/menu'
+
 function love.load() --------------------------------------------------Load
 
   ----------Camera
@@ -53,65 +55,60 @@ function love.load() --------------------------------------------------Load
 end
 
 function love.update(dt) --------------------------------------------- Update
-
-  for i = 0, tilemap.size.x - 1 do
-    for j = 0, tilemap.size.y - 1 do
-      local construction = tilemap.cells[i][j].construction
-      if construction ~= 0 then
-        --love.graphics.draw(sprites[construction].image, i*16, j*16)
-        --load_animation()
-        update_animation(sprites[construction].animation, dt)
-        --draw_animation(sprites[construction], i*16, j*16)
-      end
-    end
-  end
+  if ingame==true then
   --world:update(dt)
-  worldUpdate(dt)
-  cam:lookAt(camX, camY)
+    worldUpdate(dt)
+    cam:lookAt(camX, camY)
 
   --------------------Camera
   --movement
-  if love.keyboard.isDown('w') then
-    camY=math.floor(camY-camspeed*dt)
-  end
-  if love.keyboard.isDown('s') then
-    camY=math.floor(camY+camspeed*dt)
-  end
-  if love.keyboard.isDown('d') then
-    camX=math.floor(camX+camspeed*dt)
-  end
-  if love.keyboard.isDown('a') then
-    camX=math.floor(camX-camspeed*dt)
-  end
+    if love.keyboard.isDown('w') then
+      camY=math.floor(camY-camspeed*dt)
+    end
+    if love.keyboard.isDown('s') then
+      camY=math.floor(camY+camspeed*dt)
+    end
+    if love.keyboard.isDown('d') then
+      camX=math.floor(camX+camspeed*dt)
+    end
+    if love.keyboard.isDown('a') then
+      camX=math.floor(camX-camspeed*dt)
+    end
   --clamp
-  if camX < 0 then camX = 0 end
-  if camX > 60*16 then camX = 60*16 end
-  if camY < 0 then camY = 0 end
-  if camY > 60*16 then camY = 60*16 end
+    if camX < 0 then camX = 0 end
+    if camX > 60*16 then camX = 60*16 end
+    if camY < 0 then camY = 0 end
+    if camY > 60*16 then camY = 60*16 end
 
   --------------------UIWindow
-  UIUpdate()
+    UIUpdate()
+  end
 
 end
 
 function love.draw() ------------------------------------------------- Draw
+  if ingame==false then
+    draw_menu()
+  end
 
-  cam:attach()
+  if ingame==true then
+    cam:attach()
 
     --Tudo colocado aqui será desenhado na camera
 
     --Renderer
-    worldDraw()
-    renderer:draw()
+      worldDraw()
+      renderer:draw()
 
-  cam:detach()
+    cam:detach()
 
   --Tudo colocado aqui será desenhado em cima da camera
 
   --UI
-  UIDraw()
+    UIDraw()
+  end
 
 end
 function turnos()
-
+  money = money-expenses
 end

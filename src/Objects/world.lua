@@ -4,6 +4,7 @@
 --money
 money = 0
 credits = 0
+expenses=0
 --timer
 mTimer = 0
 mTargetTimer = 30
@@ -80,6 +81,32 @@ function worldStart()
 end
 
 function worldUpdate(dt)
+
+  for i = 0, tilemap.size.x - 1 do
+    for j = 0, tilemap.size.y - 1 do
+      local construction = tilemap.cells[i][j].construction
+      if construction ~= 0 then
+        --love.graphics.draw(sprites[construction].image, i*16, j*16)
+        --load_animation()
+        update_animation(sprites[construction].animation, dt)
+        if selected==1 then
+          expenses=expenses+28
+        elseif selected==2 then
+          expenses=expenses+28
+        elseif selected==3 then
+          expenses=expenses+3
+        elseif selected==4 then
+          expenses=expenses+16
+        elseif selected==5 then
+          expenses=expenses+15
+        else
+          expenses=expenses+416
+        end
+        --draw_animation(sprites[construction], i*16, j*16)
+      end
+    end
+  end
+
   -------------Money
   if mTimer < mTargetTimer then
     mTimer = mTimer + dt*10
@@ -157,6 +184,8 @@ function worldDraw()
     end
   end
   --Selection
+  mouseX = math.floor((love.mouse.getX()/2 + camX - 200)/16)
+  mouseY = math.floor((love.mouse.getY()/2 + camY - 150)/16)
   if mouseX > -1 and mouseX < tilemap.size.x and mouseY > -1 and mouseY < tilemap.size.y then
     love.graphics.rectangle("line", mouseX*16, mouseY*16, 16, 16, 2, 2)
   end

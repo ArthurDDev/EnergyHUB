@@ -4,6 +4,7 @@
 --money
 money = 0
 credits = 0
+research = 100
 --timer
 mTimer = 0
 mTargetTimer = 30
@@ -77,6 +78,8 @@ function worldStart()
     end
   end
 
+  UILoad()
+
 end
 
 function worldUpdate(dt)
@@ -95,9 +98,9 @@ function worldUpdate(dt)
   --Debug
   if mouseX > -1 and mouseX < tilemap.size.x and mouseY > -1 and mouseY < tilemap.size.y then
     if tilemap.cells[mouseX][mouseY].filled == true then
-      print("Position: "..mouseX.." : "..mouseY.." -- Cell:  "..tilemap.cells[mouseX][mouseY].type.." : ".."True".." : "..tilemap.cells[mouseX][mouseY].construction)
+      --print("Position: "..mouseX.." : "..mouseY.." -- Cell:  "..tilemap.cells[mouseX][mouseY].type.." : ".."True".." : "..tilemap.cells[mouseX][mouseY].construction)
     else
-      print("Position: "..mouseX.." : "..mouseY.." -- Cell:  "..tilemap.cells[mouseX][mouseY].type.." : ".."False".." : "..tilemap.cells[mouseX][mouseY].construction)
+      --print("Position: "..mouseX.." : "..mouseY.." -- Cell:  "..tilemap.cells[mouseX][mouseY].type.." : ".."False".." : "..tilemap.cells[mouseX][mouseY].construction)
     end
   else
     print("No tile selected!")

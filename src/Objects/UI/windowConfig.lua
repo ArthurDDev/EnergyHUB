@@ -198,7 +198,23 @@ local table = {
             unlocked = false,
             bought = false
         }
+    },
+    warnings = {
+        {
+            text = "Teste",
+            fn = function()  end,
+            width = 80,
+            height = 80,
+            x = 20,
+            y = 20,
+            clickable = true,
+            background = true,
+            image = nil,
+            imageX = nil,
+            imageY = nil
+        }
     }
+    
 
 }
 

@@ -140,6 +140,7 @@ function UIWindow:create(type, windowX, windowY, windowWidth, windowHeight)
                     if type == "selection" then
                         if buttons[i].hot  == true then color = {.458*2.5, .297*2.5, .129*2.5, 1} end
                         if scienceWindow:getButton(i).bought ~= true then color = {.458, .297, .129, 1} end
+                        if selected == i then color = {.458*3, .297*3, .129*3, 1} end
                     end
                 end
 

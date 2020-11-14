@@ -8,7 +8,8 @@
         "offset": {
             "X" : 1,
             "Y" : 1
-        }
+        },
+        "place" : "land"
     },
     "2" : {
         "name" : "Biomassa",
@@ -19,18 +20,20 @@
         "offset": {
             "X" : 4,
             "Y" : 2
-        }
+        },
+        "place" : "land"
     },
     "3" : {
         "name" : "Hidroeletrica",
         "size" : {
-            "width" : 3,
+            "width" : 4,
             "height" : 3
         },
         "offset": {
             "X" : 2,
             "Y" : 2
-        }
+        },
+        "place" : "river"
     },
     "4" : {
         "name" : "Solar",
@@ -39,9 +42,10 @@
             "height" : 3
         },
         "offset": {
-            "X" : 3,
-            "Y" : 6
-        }
+            "X" : 2,
+            "Y" : 2
+        },
+        "place" : "land"
     },
     "5" : {
         "name" : "Eólica",
@@ -52,7 +56,8 @@
         "offset": {
             "X" : 2,
             "Y" : 7
-        }
+        },
+        "place" : "land"
     },
     "6" : {
         "name" : "Nuclear",
@@ -63,6 +68,7 @@
         "offset": {
             "X" : 1,
             "Y" : 1
-        }
+        },
+        "place" : "land"
     }
 }

@@ -103,29 +103,21 @@ function worldUpdate(dt)
     end
   end
 
-  for i = 0, tilemap.size.x - 1 do
-    for j = 0, tilemap.size.y - 1 do
-      local construction = tilemap.cells[i][j].construction
-      if construction ~= 0 then
-        --love.graphics.draw(sprites[construction].image, i*16, j*16)
-        --load_animation()
-        update_animation(sprites[construction].animation, dt)
-        if selected==1 then
-          expenses=expenses+28
-        elseif selected==2 then
-          expenses=expenses+28
-        elseif selected==3 then
-          expenses=expenses+3
-        elseif selected==4 then
-          expenses=expenses+16
-        elseif selected==5 then
-          expenses=expenses+15
-        else
-          expenses=expenses+416
-        end
-        --draw_animation(sprites[construction], i*16, j*16)
-      end
-    end
+  for key, animation in pairs(animations) do
+    update_animation(animation, dt)
+  end
+  if selected==1 then
+    expenses=expenses+28
+  elseif selected==2 then
+    expenses=expenses+28
+  elseif selected==3 then
+    expenses=expenses+3
+  elseif selected==4 then
+    expenses=expenses+16
+  elseif selected==5 then
+    expenses=expenses+15
+  else
+    expenses=expenses+416
   end
 
   -------------Money
@@ -248,6 +240,14 @@ function load_animation()
   sprites[4].animation = anim8.newAnimation(grid4(1, '1-10'), 0.3)
   sprites[5].animation = anim8.newAnimation(grid5('1-5', 1), 0.3)
   sprites[6].animation = anim8.newAnimation(grid6(1, '1-2'), 0.3)
+
+  animations={}
+  table.insert(animations, sprites[1].animation)
+  table.insert(animations, sprites[2].animation)
+  table.insert(animations, sprites[3].animation)
+  table.insert(animations, sprites[4].animation)
+  table.insert(animations, sprites[5].animation)
+  table.insert(animations, sprites[6].animation)
 end
 
 function update_animation(animation, dt)

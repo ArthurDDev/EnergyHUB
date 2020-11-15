@@ -199,12 +199,12 @@ local table = {
             bought = false
         }
     },
-    warnings = {
+    buy = {
         {
-            text = "Teste",
+            text = "Comprar \ncreditos de \npesquisa",
             fn = function()  end,
-            width = 80,
-            height = 80,
+            width = 60,
+            height = 60,
             x = 20,
             y = 20,
             clickable = true,
@@ -212,9 +212,49 @@ local table = {
             image = nil,
             imageX = nil,
             imageY = nil
+        },
+        {
+            text = "Comprar \ndinheiro",
+            fn = function()  end,
+            width = 60,
+            height = 60,
+            x = 20,
+            y = 100,
+            clickable = true,
+            background = true,
+            image = nil,
+            imageX = nil,
+            imageY = nil
+        }
+    },
+    warnings = {
+        {
+            text = "",
+            fn = function()  end,
+            width = 0,
+            height = 0,
+            x = 5,
+            y = 5,
+            clickable = true,
+            background = true,
+            image = nil,
+            imageX = nil,
+            imageY = nil
+        },
+        {
+            text = "ok",
+            fn = function()  end,
+            width = 50,
+            height = 20,
+            x = 170,
+            y = 35,
+            clickable = true,
+            background = true,
+            image = nil,
+            imageX = nil,
+            imageY = nil
         }
     }
-    
 
 }
 

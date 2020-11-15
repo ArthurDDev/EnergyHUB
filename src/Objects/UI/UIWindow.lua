@@ -33,8 +33,8 @@ function UIWindow:create(type, windowX, windowY, windowWidth, windowHeight)
 
     local buttons = {}
 
-    local open = false
-    if type == "selection" then open = true end
+    local open = true
+    if type == "science" or type == "buy" or type == "warning" then open = false end
 
     if type == "selection" then
         for i = 1, 6 do
@@ -50,25 +50,51 @@ function UIWindow:create(type, windowX, windowY, windowWidth, windowHeight)
                 windowConfig.constructionSelection[i].y + windowY
             ))
         end
-    else
-        if type == "science" then
-            for i = 1, 6 do
-                table.insert(buttons,newButton(
-                    windowConfig.scienceTree[i].text,
-                    windowConfig.scienceTree[i].image,
-                    windowConfig.scienceTree[i].imageX,
-                    windowConfig.scienceTree[i].imageY,
-                    windowConfig.scienceTree[i].fn,
-                    windowConfig.scienceTree[i].width,
-                    windowConfig.scienceTree[i].height,
-                    windowConfig.scienceTree[i].x + windowX,
-                    windowConfig.scienceTree[i].y + windowY,
-                    windowConfig.scienceTree[i].price,
-                    windowConfig.scienceTree[i].sPrice,
-                    windowConfig.scienceTree[i].unlocked,
-                    windowConfig.scienceTree[i].bought
-                ))
-            end
+    elseif type == "science" then
+        for i = 1, 6 do
+            table.insert(buttons,newButton(
+                windowConfig.scienceTree[i].text,
+                windowConfig.scienceTree[i].image,
+                windowConfig.scienceTree[i].imageX,
+                windowConfig.scienceTree[i].imageY,
+                windowConfig.scienceTree[i].fn,
+                windowConfig.scienceTree[i].width,
+                windowConfig.scienceTree[i].height,
+                windowConfig.scienceTree[i].x + windowX,
+                windowConfig.scienceTree[i].y + windowY,
+                windowConfig.scienceTree[i].price,
+                windowConfig.scienceTree[i].sPrice,
+                windowConfig.scienceTree[i].unlocked,
+                windowConfig.scienceTree[i].bought
+            ))
+        end
+    elseif type == "warning" then
+        for i = 1, 2 do
+            table.insert(buttons,newButton(
+                windowConfig.warnings[i].text,
+                nil,
+                nil,
+                nil,
+                windowConfig.warnings[i].fn,
+                windowConfig.warnings[i].width,
+                windowConfig.warnings[i].height,
+                windowConfig.warnings[i].x + windowX,
+                windowConfig.warnings[i].y + windowY
+            ))
+        end
+    elseif type == "buy" then
+        for i = 1, 2 do
+            table.insert(buttons,newButton(
+                windowConfig.buy[i].text,
+                nil,
+                nil,
+                nil,
+                windowConfig.buy[i].fn,
+                windowConfig.buy[i].width,
+                windowConfig.buy[i].height,
+                windowConfig.buy[i].x + windowX,
+                windowConfig.buy[i].y + windowY
+            ))
         end
     end
 
@@ -155,7 +181,7 @@ function UIWindow:create(type, windowX, windowY, windowWidth, windowHeight)
                 )
 
                 love.graphics.setColor({1, 1, 1, 1})
-                if buttons[i].image ~= 0 then
+                if buttons[i].image ~= nil then
                     love.graphics.draw(buttons[i].image, buttons[i].x + buttons[i].imageX, buttons[i].y + buttons[i].imageY)
                 end
 

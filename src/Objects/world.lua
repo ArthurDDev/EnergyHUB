@@ -3,7 +3,7 @@
 ----------------Controll
 --money
 money = 0
-credits = 0
+credits = 1000
 research = 100
 expenses=0
 --timer

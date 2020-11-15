@@ -41,6 +41,8 @@ require 'src/Objects/UI/UI'
 
 require 'src/Objects/menu'
 
+local justClicked = false
+
 function love.load() --------------------------------------------------Load
 
   ----------Camera
@@ -55,6 +57,16 @@ function love.load() --------------------------------------------------Load
 end
 
 function love.update(dt) --------------------------------------------- Update
+
+  if love.keyboard.isDown('t') then
+    if justClicked then
+      if energy >= energyr then
+        turnos()
+        end
+      end
+    justClicked = false
+    else justClicked = true end
+
   if ingame==true then
   --world:update(dt)
     worldUpdate(dt)
@@ -111,4 +123,8 @@ function love.draw() ------------------------------------------------- Draw
 end
 function turnos()
   money = money-expenses
+  population = population + population * 0.008
+  energyr = population * 2.241
+
+
 end

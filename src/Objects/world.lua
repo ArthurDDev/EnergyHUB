@@ -10,8 +10,10 @@ expenses=0
 mTimer = 0
 mTargetTimer = 30
 moneyAdd = 50
-
----------------Tiles
+energy = 0
+energyr = 448312000
+population = 200000000
+---------------Tiless
 size = {}
 size.x = 60
 size.y = 60
@@ -68,6 +70,8 @@ function worldStart()
       tilemap.cells[i][j].father = {}
       tilemap.cells[i][j].father["X"] = nil
       tilemap.cells[i][j].father["Y"] = nil
+      tilemap.cells[i][j].energy = 0
+      tilemap.cells[i][j].credits = 0
 
       local r, g, b, a = imagedata:getPixel(i, j)
 
@@ -85,6 +89,19 @@ function worldStart()
 end
 
 function worldUpdate(dt)
+  energy = 0
+  for i = 0, 59 do
+    for j = 0, 59 do
+      energy = energy + tilemap.cells[i][j].energy
+    end
+  end
+
+  credits = 0
+  for i = 0, 59 do
+    for j = 0, 59 do
+      credits = credits + tilemap.cells[i][j].credits
+    end
+  end
 
   for i = 0, tilemap.size.x - 1 do
     for j = 0, tilemap.size.y - 1 do
@@ -153,6 +170,8 @@ function worldUpdate(dt)
     if tilemap.cells[mouseX][mouseY].filled == false then
       if proceed == true then
         tilemap.cells[mouseX - offsetX + 1][mouseY - offsetY + 1].construction = selected
+        tilemap.cells[mouseX - offsetX + 1][mouseY - offsetY + 1].energy = constructionConfig[''..selected]['energy']
+        tilemap.cells[mouseX - offsetX + 1][mouseY - offsetY + 1].credits = constructionConfig[''..selected]['credits']
 
         for i = 0, width - 1 do
           for j = 0, height - 1 do

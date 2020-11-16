@@ -202,7 +202,10 @@ local table = {
     buy = {
         {
             text = "Comprar \ncreditos de \npesquisa",
-            fn = function()  end,
+            fn = function()
+                research = research + 1
+                credits = credits - 1000
+            end,
             width = 60,
             height = 60,
             x = 20,
@@ -215,7 +218,10 @@ local table = {
         },
         {
             text = "Comprar \ndinheiro",
-            fn = function()  end,
+            fn = function()
+                money = money + 10
+                credits = credits - 1000
+            end,
             width = 60,
             height = 60,
             x = 20,
@@ -243,11 +249,26 @@ local table = {
         },
         {
             text = "ok",
-            fn = function()  end,
+            fn = function() warningWindow:toggleOpen("close") end,
             width = 50,
             height = 20,
             x = 170,
             y = 35,
+            clickable = true,
+            background = true,
+            image = nil,
+            imageX = nil,
+            imageY = nil
+        }
+    },
+    information = {
+        {
+            text = "",
+            fn = function()  end,
+            width = 0,
+            height = 0,
+            x = 5,
+            y = 5,
             clickable = true,
             background = true,
             image = nil,

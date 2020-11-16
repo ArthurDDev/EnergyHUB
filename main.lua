@@ -62,10 +62,10 @@ function love.update(dt) --------------------------------------------- Update
     if justClicked then
       if energy >= energyr then
         turnos()
-        end
       end
+    end
     justClicked = false
-    else justClicked = true end
+  else justClicked = true end
 
   if ingame==true then
   --world:update(dt)
@@ -87,10 +87,10 @@ function love.update(dt) --------------------------------------------- Update
       camX=math.floor(camX-camspeed*dt)
     end
   --clamp
-    if camX < 0 then camX = 0 end
-    if camX > 60*16 then camX = 60*16 end
-    if camY < 0 then camY = 0 end
-    if camY > 60*16 then camY = 60*16 end
+    if camX < 200 then camX = 200 end
+    if camX > 60*16 - 200 then camX = 60*16 - 200 end
+    if camY < 150 then camY = 150 end
+    if camY > 60*16 - 150 then camY = 60*16 - 150 end
 
   --------------------UIWindow
     UIUpdate()
@@ -126,5 +126,6 @@ function turnos()
   population = population + population * 0.008
   energyr = population * 2.241
 
+  credits = credits + nextcredits
 
 end

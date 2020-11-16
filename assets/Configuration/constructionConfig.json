@@ -11,21 +11,25 @@
         },
         "place" : "land",
         "energy" : 2850,
-        "credits" : 0
+        "credits" : 0,
+        "cost" : 700,
+        "maintence" :28
     },
     "2" : {
         "name" : "Biomassa",
         "size" : {
-            "width" : 7,
+            "width" : 6,
             "height" : 4
         },
         "offset": {
-            "X" : 4,
-            "Y" : 2
+            "X" : 1,
+            "Y" : 1
         },
         "place" : "land",
         "energy" : 3050,
-        "credits" : 116
+        "credits" : 116,
+        "cost" : 700,
+        "maintence" :28
     },
     "3" : {
         "name" : "Hidroeletrica",
@@ -39,7 +43,9 @@
         },
         "place" : "river",
         "energy" : 4900,
-        "credits" : 166
+        "credits" : 166,
+        "cost" : 850,
+        "maintence" : 3
     },
     "4" : {
         "name" : "Solar",
@@ -53,7 +59,9 @@
         },
         "place" : "land",
         "energy" : 2850,
-        "credits" : 103
+        "credits" : 103,
+        "cost" : 1100,
+        "maintence" : 16
     },
     "5" : {
         "name" : "Eólica",
@@ -67,7 +75,9 @@
         },
         "place" : "land",
         "energy" : 2750,
-        "credits" : 102
+        "credits" : 102,
+        "cost" : 1000,
+        "maintence" :15
     },
     "6" : {
         "name" : "Nuclear",
@@ -81,6 +91,8 @@
         },
         "place" : "land",
         "energy" : 2500,
-        "credits" : 0
+        "credits" : 0,
+        "cost" : 1200,
+        "maintence" :416
     }
 }

@@ -96,9 +96,31 @@ function UIWindow:create(type, windowX, windowY, windowWidth, windowHeight)
                 windowConfig.buy[i].y + windowY
             ))
         end
+    elseif type == "information" then
+        for i = 1, 1 do
+            table.insert(buttons,newButton(
+                windowConfig.information[i].text,
+                nil,
+                nil,
+                nil,
+                windowConfig.information[i].fn,
+                windowConfig.information[i].width,
+                windowConfig.information[i].height,
+                windowConfig.information[i].x + windowX,
+                windowConfig.information[i].y + windowY
+            ))
+        end
     end
 
     function uiWindow:update()
+
+        if type == "information" then
+            windowX = love.mouse.getX()
+            windowY = love.mouse.getY() - 100
+
+            buttons[1].x = windowConfig.information[1].x + windowX
+            buttons[1].y = windowConfig.information[1].x + windowY
+        end
 
         if open == true then
             local mx = love.mouse.getX()
@@ -134,10 +156,10 @@ function UIWindow:create(type, windowX, windowY, windowWidth, windowHeight)
                                 if i == 4 or i == 5 then buttons[6].unlocked = true end
                             end
                         end
-                    else
-                        if type == "selection" then
-                            if scienceWindow:getButton(i).bought then buttons[i].fn() end
-                        end
+                    elseif type == "selection" then
+                        if scienceWindow:getButton(i).bought then buttons[i].fn() end
+                    elseif type == "warning" or type == "buy" then
+                        buttons[i].fn()
                     end
                 end
             end
@@ -201,9 +223,21 @@ function UIWindow:create(type, windowX, windowY, windowWidth, windowHeight)
 
     end
 
-    function uiWindow:toggleOpen()
-        if open == true then open = false
-        else open = true end
+    function uiWindow:toggleOpen(lastState)
+        local lastState = lastState or ""
+
+        if lastState == "open" then
+            open = true
+        elseif lastState == "close" then
+            open = false
+        else
+            if open == true then open = false
+            else open = true end
+        end
+    end
+
+    function uiWindow:setText(text)
+        buttons[1].text = text
     end
 
     function uiWindow:getButton(n)

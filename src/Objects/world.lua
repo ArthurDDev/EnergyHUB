@@ -2,17 +2,15 @@
 --require 'src/Tools/animation'
 ----------------Controll
 --money
-money = 0
-credits = 1000
-research = 100
+money = 10000
+nextcredits = 0
+credits = 0
+research = 0
 expenses=0
 --timer
-mTimer = 0
-mTargetTimer = 30
-moneyAdd = 50
 energy = 0
-energyr = 448312000
-population = 200000000
+energyr = 0
+population = 11000000
 ---------------Tiless
 size = {}
 size.x = 60
@@ -49,6 +47,8 @@ isMouseOnWorld = true
 
 function worldStart()
 
+  energyr = population * 2.241
+
   load_animation()
   ----------------Tiles
   --tileset
@@ -68,10 +68,11 @@ function worldStart()
       tilemap.cells[i][j].construction = 0
       tilemap.cells[i][j].sprite = 2
       tilemap.cells[i][j].father = {}
-      tilemap.cells[i][j].father["X"] = nil
-      tilemap.cells[i][j].father["Y"] = nil
+      tilemap.cells[i][j].father["X"] = -1
+      tilemap.cells[i][j].father["Y"] = -1
       tilemap.cells[i][j].energy = 0
       tilemap.cells[i][j].credits = 0
+      tilemap.cells[i][j].maintence = 0
 
       local r, g, b, a = imagedata:getPixel(i, j)
 
@@ -90,42 +91,18 @@ end
 
 function worldUpdate(dt)
   energy = 0
+  nextcredits = 0
+  expenses = 0
   for i = 0, 59 do
     for j = 0, 59 do
       energy = energy + tilemap.cells[i][j].energy
-    end
-  end
-
-  credits = 0
-  for i = 0, 59 do
-    for j = 0, 59 do
-      credits = credits + tilemap.cells[i][j].credits
+      nextcredits = nextcredits + tilemap.cells[i][j].credits
+      if tilemap.cells[i][j].maintence ~= 0 then expenses = expenses - tilemap.cells[i][j].maintence end
     end
   end
 
   for key, animation in pairs(animations) do
     update_animation(animation, dt)
-  end
-  if selected==1 then
-    expenses=expenses+28
-  elseif selected==2 then
-    expenses=expenses+28
-  elseif selected==3 then
-    expenses=expenses+3
-  elseif selected==4 then
-    expenses=expenses+16
-  elseif selected==5 then
-    expenses=expenses+15
-  else
-    expenses=expenses+416
-  end
-
-  -------------Money
-  if mTimer < mTargetTimer then
-    mTimer = mTimer + dt*10
-  else
-    mTimer = 0
-    money = money + moneyAdd
   end
 
   --------------Build
@@ -134,10 +111,11 @@ function worldUpdate(dt)
 
   --Debug
   if mouseX > -1 and mouseX < tilemap.size.x and mouseY > -1 and mouseY < tilemap.size.y then
+    print(tilemap.cells[mouseX][mouseY].father["X"].." : "..tilemap.cells[mouseX][mouseY].father["Y"])
     if tilemap.cells[mouseX][mouseY].filled == true then
-      print("Position: "..mouseX.." : "..mouseY.." -- Cell:  "..tilemap.cells[mouseX][mouseY].type.." : ".."True".." : "..tilemap.cells[mouseX][mouseY].construction)
+      --print("Position: "..mouseX.." : "..mouseY.." -- Cell:  "..tilemap.cells[mouseX][mouseY].type.." : ".."True".." : "..tilemap.cells[mouseX][mouseY].construction)
     else
-      print("Position: "..mouseX.." : "..mouseY.." -- Cell:  "..tilemap.cells[mouseX][mouseY].type.." : ".."False".." : "..tilemap.cells[mouseX][mouseY].construction)
+      --print("Position: "..mouseX.." : "..mouseY.." -- Cell:  "..tilemap.cells[mouseX][mouseY].type.." : ".."False".." : "..tilemap.cells[mouseX][mouseY].construction)
     end
   else
     print("No tile selected!")
@@ -162,17 +140,40 @@ function worldUpdate(dt)
     if tilemap.cells[mouseX][mouseY].filled == false then
       if proceed == true then
         tilemap.cells[mouseX - offsetX + 1][mouseY - offsetY + 1].construction = selected
-        tilemap.cells[mouseX - offsetX + 1][mouseY - offsetY + 1].energy = constructionConfig[''..selected]['energy']
+        tilemap.cells[mouseX - offsetX + 1][mouseY - offsetY + 1].energy = constructionConfig[''..selected]['energy']*1000
         tilemap.cells[mouseX - offsetX + 1][mouseY - offsetY + 1].credits = constructionConfig[''..selected]['credits']
+        tilemap.cells[mouseX - offsetX + 1][mouseY - offsetY + 1].maintence = constructionConfig[''..selected]['maintence']
 
         for i = 0, width - 1 do
           for j = 0, height - 1 do
-            tilemap.cells[mouseX - offsetX + 1 + i][mouseY - offsetX + 1 + j].filled = true
-            tilemap.cells[mouseX - offsetX + 1 + i][mouseY - offsetX + 1 + j].father["X"] = mouseX - offsetX + 1
-            tilemap.cells[mouseX - offsetX + 1 + i][mouseY - offsetX + 1 + j].father["Y"] = mouseX - offsetY + 1
+            tilemap.cells[mouseX - offsetX + 1 + i][mouseY - offsetY + 1 + j].filled = true
+            tilemap.cells[mouseX - offsetX + 1 + i][mouseY - offsetY + 1 + j].father["X"] = mouseX - offsetX + 1
+            tilemap.cells[mouseX - offsetX + 1 + i][mouseY - offsetY + 1 + j].father["Y"] = mouseY - offsetY + 1
           end
         end
       end
+    end
+  end
+
+  --information
+
+  if isMouseOnWorld then
+    if tilemap.cells[mouseX][mouseY].father["X"] ~= -1 or tilemap.cells[mouseX][mouseY].construction ~= 0 then
+      local cellConstruction
+
+      if tilemap.cells[mouseX][mouseY].father["X"] ~= 0 then
+        cellConstruction = tilemap.cells[tilemap.cells[mouseX][mouseY].father["X"]][tilemap.cells[mouseX][mouseY].father["Y"]].construction
+      else
+        cellConstruction = tilemap.cells[mouseX][mouseY].construction
+      end
+
+    if cellConstruction ~= 0 then showInformation(
+      "Produz "..constructionConfig[""..cellConstruction]["energy"].." MWh"..
+      "\nProduz "..constructionConfig[""..cellConstruction]["credits"].." Creditos de carbono"..
+      "\nCusta "..constructionConfig[""..cellConstruction]["maintence"].." De manutenção"
+    ) end
+    else
+      informationWindow:toggleOpen("close")
     end
   end
 

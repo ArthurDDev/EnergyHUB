@@ -122,6 +122,7 @@ function love.draw() ------------------------------------------------- Draw
 
 end
 function turnos()
+  money = money + moneyperround
   money = money-expenses
   population = population + population * 0.008
   energyr = population * 2.241

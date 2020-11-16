@@ -24,7 +24,7 @@ local table = {
             clickable = true,
             background = true,
             image = sprites[2].image,
-            imageX = 20,
+            imageX = -15,
             imageY = 20
         },
         {
@@ -63,8 +63,8 @@ local table = {
             clickable = true,
             background = true,
             image = sprites[5].image,
-            imageX = 20,
-            imageY = 20
+            imageX = 10,
+            imageY = -10
         },
         {
             text = "Nuclear",
@@ -136,7 +136,7 @@ local table = {
             bought = true
         },
         {
-            text = "Solar",
+            text = "Solar\n5 Cie",
             fn = function(buttons)
                 buttons.bought = true
                 money = money - buttons.price
@@ -157,7 +157,7 @@ local table = {
             bought = false
         },
         {
-            text = "Eolica",
+            text = "Eolica\n5 Cie",
             fn = function(buttons)
                 buttons.bought = true
                 money = money - buttons.price
@@ -178,7 +178,7 @@ local table = {
             bought = false
         },
         {
-            text = "Nuclear",
+            text = "Nuclear\n20 Cie",
             fn = function(buttons)
                 buttons.bought = true
                 money = money - buttons.price
@@ -204,7 +204,7 @@ local table = {
             text = "Comprar \ncreditos de \npesquisa",
             fn = function()
                 research = research + 1
-                credits = credits - 1000
+                credits = credits - 25000
             end,
             width = 60,
             height = 60,
@@ -219,8 +219,8 @@ local table = {
         {
             text = "Comprar \ndinheiro",
             fn = function()
-                money = money + 10
-                credits = credits - 1000
+                money = money + (.05)*50000
+                credits = credits - (1)*50000
             end,
             width = 60,
             height = 60,

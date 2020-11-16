@@ -204,7 +204,8 @@ function UIWindow:create(type, windowX, windowY, windowWidth, windowHeight)
 
                 love.graphics.setColor({1, 1, 1, 1})
                 if buttons[i].image ~= nil then
-                    love.graphics.draw(buttons[i].image, buttons[i].x + buttons[i].imageX, buttons[i].y + buttons[i].imageY)
+                    draw_animation(sprites[i], buttons[i].x + buttons[i].imageX, buttons[i].y + buttons[i].imageY)
+                   -- love.graphics.draw(buttons[i].image, buttons[i].x + buttons[i].imageX, buttons[i].y + buttons[i].imageY)
                 end
 
                 love.graphics.setColor({0, 0, 0, 1})

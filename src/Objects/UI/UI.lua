@@ -40,7 +40,7 @@ function UIDraw()
 
     love.graphics.print('$: '..money, 10, 30)
     love.graphics.print('Credits: '..credits, 10, 10)
-    love.graphics.print((energy/1000)..'/'..energyr/1000, 10, 70)
+    love.graphics.print(energy..'/'..energyr, 10, 70)
     love.graphics.print('Research Credits: '..research, 10, 50)
 end
 

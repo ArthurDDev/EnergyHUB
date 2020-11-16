@@ -10,10 +10,10 @@
             "Y" : 1
         },
         "place" : "land",
-        "energy" : 2850,
+        "energy" : 570000,
         "credits" : 0,
-        "cost" : 700,
-        "maintence" :28
+        "cost" : 40000,
+        "maintence" : 5000
     },
     "2" : {
         "name" : "Biomassa",
@@ -26,10 +26,10 @@
             "Y" : 1
         },
         "place" : "land",
-        "energy" : 3050,
-        "credits" : 116,
-        "cost" : 700,
-        "maintence" :28
+        "energy" : 305000,
+        "credits" : 244000,
+        "cost" : 70000,
+        "maintence" : 2800
     },
     "3" : {
         "name" : "Hidroeletrica",
@@ -42,10 +42,10 @@
             "Y" : 2
         },
         "place" : "river",
-        "energy" : 4900,
-        "credits" : 166,
-        "cost" : 850,
-        "maintence" : 3
+        "energy" : 2450000,
+        "credits" : 1748786,
+        "cost" : 425000,
+        "maintence" : 15000
     },
     "4" : {
         "name" : "Solar",
@@ -58,10 +58,10 @@
             "Y" : 2
         },
         "place" : "land",
-        "energy" : 2850,
-        "credits" : 103,
-        "cost" : 1100,
-        "maintence" : 16
+        "energy" : 71250,
+        "credits" : 2180,
+        "cost" : 27500,
+        "maintence" : 400
     },
     "5" : {
         "name" : "Eólica",
@@ -74,10 +74,10 @@
             "Y" : 7
         },
         "place" : "land",
-        "energy" : 2750,
-        "credits" : 102,
-        "cost" : 1000,
-        "maintence" :15
+        "energy" : 13750,
+        "credits" : 10778,
+        "cost" : 50000,
+        "maintence" :750
     },
     "6" : {
         "name" : "Nuclear",
@@ -90,9 +90,9 @@
             "Y" : 1
         },
         "place" : "land",
-        "energy" : 2500,
+        "energy" : 750000,
         "credits" : 0,
-        "cost" : 1200,
-        "maintence" :416
+        "cost" : 1680000,
+        "maintence" :582400
     }
 }

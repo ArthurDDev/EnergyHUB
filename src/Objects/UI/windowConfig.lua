@@ -203,8 +203,10 @@ local table = {
         {
             text = "Comprar \ncreditos de \npesquisa",
             fn = function()
-                research = research + 1
-                credits = credits - 25000
+                if credits >= 25000 then
+                    research = research + 1
+                    credits = credits - 25000
+                end
             end,
             width = 60,
             height = 60,
@@ -219,8 +221,10 @@ local table = {
         {
             text = "Comprar \ndinheiro",
             fn = function()
-                money = money + (.05)*50000
-                credits = credits - (1)*50000
+                if credits >= 50000 then
+                    money = money + (.05)*50000
+                    credits = credits - (1)*50000
+                end
             end,
             width = 60,
             height = 60,

@@ -62,6 +62,8 @@ function love.update(dt) --------------------------------------------- Update
     if justClicked then
       if energy >= energyr then
         turnos()
+      else
+        showWarning("Você não está produzindo o suficiente \npara passar de ano")
       end
     end
     justClicked = false
